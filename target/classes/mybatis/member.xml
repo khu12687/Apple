@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member">
+	
+	<insert id="insert">					
+		INSERT INTO member (id, passwd, name, email, address, phone)
+		VALUES (#{id}, #{password}, #{name}, #{email}, #{address}, #{phone})
+	</insert>
+	
+	<select id="loginCheck" parameterType="Member" resultType="Member">
+		select * from member 
+		where id=#{id} and passwd=#{password}
+	</select>
+	
+	<select id="check_id" resultType="Integer">
+		SELECT COUNT(id) FROM member
+		WHERE id=#{id}
+	</select>
+	
+	<select id="checkPhone" resultType="Member" >
+		SELECT * FROM MEMBER
+		WHERE id = #{id}
+	</select>
+	
+	<select id="checkPhonetoId" resultType="Member">
+		SELECT * FROM MEMBER
+		WHERE phone = #{phone}
+	</select>
+	
+	<update id="changePw">
+		update member set passwd = ${password}
+		where id = #{id}
+	</update>
+	
+	<select id="select" parameterType="String" resultType="Member">
+		select * from member
+		where id=#{id}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

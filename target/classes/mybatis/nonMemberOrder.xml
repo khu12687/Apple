@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nmo">
+
+	<resultMap type="NonMemberOrder" id="joinMap">
+		<id column="nonMemberOrder_id" property="nonMemberOrder_id"/>
+		<result column="nm_name" property="nm_name"/>
+		<result column="nm_email" property="nm_email"/>
+		<result column="nm_address" property="nm_address"/>
+		<result column="nm_phone" property="nm_phone"/>
+		<result column="nm_order_date" property="nm_order_date"/>	
+		
+		<collection property="cart" column="nonMemberOrder_id" ofType="Cart" javaType="ArrayList">
+			<id column="product_id" property="product_id"/>
+			<result column="product_name" property="product_name"/>
+			<result column="color" property="color"/>
+			<result column="price" property="price"/>
+			<result column="volume" property="volume"/>
+			<result column="category" property="category"/>
+			<result column="filename" property="filename"/>
+		</collection>
+	</resultMap>
+
+
+
+	<insert id="insert" parameterType="NonMemberOrder">
+		INSERT INTO nonMemberOrder (nm_name, nm_email, nm_address, nm_phone, nm_order_date)
+		VALUES (#{nm_name}, #{nm_email}, #{nm_address}, #{nm_phone}, NOW())
+		
+		<selectKey keyColumn="nonMemberOrder_id" resultType="int" keyProperty="nonMemberOrder_id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<select id="selectNonMemberOrder" parameterType="int" resultMap="joinMap">
+		SELECT nonMemberOrder.*, 
+			product.product_id product_id,
+			product.nonMemberOrder_id nonMemberOrder_id,
+			product.product_name product_name, 
+			product.color color,
+			product.price price,
+			product.volume volume,
+			product.category category,
+			product.filename filename
+		FROM nonMemberOrder
+		JOIN product ON nonMemberOrder.nonMemberOrder_id=product.nonMemberOrder_id
+		where nonMemberOrder.nonMemberOrder_id=#{nonMemberOrder_id}	
+	</select>	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orders">
+
+	<resultMap type="Orders" id="joinMap">
+		<id column="order_id" property="order_id"/>
+		<result column="ea" property="ea"/>
+		<result column="order_date" property="order_date"/>
+		<association column="receiver_id" property="receiver" select="Receiver.select"/>		
+		<association column="member_id" property="member" select="Member.select"/>
+		
+		<collection property="cart" column="order_id" ofType="Cart" javaType="ArrayList">
+			<id column="product_id" property="product_id"/>
+			<result column="product_name" property="product_name"/>
+			<result column="color" property="color"/>
+			<result column="price" property="price"/>
+			<result column="volume" property="volume"/>
+			<result column="category" property="category"/>
+			<result column="filename" property="filename"/>
+		</collection>
+	</resultMap>
+
+
+
+	<insert id="insert" parameterType="Orders">
+		INSERT INTO orders (id , receiver_id, order_date, ea)
+		VALUES (#{member.id}, #{receiver.receiver_id}, NOW(), #{ea})
+		
+		<selectKey keyColumn="order_id" resultType="int" keyProperty="order_id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<select id="selectOrders" parameterType="int" resultMap="joinMap">
+		SELECT orders.*, 
+			product.product_id product_id,
+			product.order_id order_id,
+			product.product_name product_name, 
+			product.color color,
+			product.price price,
+			product.volume volume,
+			product.category category,
+			product.filename filename
+		FROM orders
+		JOIN product ON orders.order_id=product.order_id
+		where orders.order_id=#{order_id}	
+	</select>	
+	<select id="list" resultMap="joinMap">
+		SELECT orders.*, 
+			product.product_id product_id,
+			product.order_id order_id,
+			product.product_name product_name, 
+			product.color color,
+			product.price price,
+			product.volume volume,
+			product.category category,
+			product.filename filename
+		FROM orders
+		JOIN product ON orders.order_id=product.order_id
+	</select>
+	
+	<select id="selectMember" resultMap="joinMap">
+		SELECT orders.*,
+			member.id member_id,
+			member.passwd passwd,
+			member.name name,
+			member.email email,
+			member.address address,
+			member.phone phone, 
+			product.product_id product_id,
+			product.order_id order_id,
+			product.product_name product_name, 
+			product.color color,
+			product.price price,
+			product.volume volume,
+			product.category category,
+			product.filename filename,
+			receiver.receiver_id,
+			receiver.rname,
+			receiver.raddr,
+			receiver.remail,
+			receiver.rphone
+		FROM orders
+		JOIN member ON orders.id=member.id
+		JOIN product ON orders.order_id = product.order_id
+		JOIN receiver ON orders.receiver_id = receiver.receiver_id
+		where orders.id =#{id}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
