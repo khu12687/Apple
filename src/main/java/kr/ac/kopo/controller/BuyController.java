@@ -36,6 +36,26 @@ public class BuyController {
 	
 	private String path = "/buy";
 	
+	public int setPriceFromV(Cart obj){
+		int price=0;
+		if(obj.getVolume() == 128 && obj.getCategory().equals("0")) {
+			price = 1350000;
+		}else if(obj.getVolume() == 256 && obj.getCategory().equals("0")) {
+			price = 1490000;
+		}else if(obj.getVolume() == 512 && obj.getCategory().equals("0")) {
+			price = 176000;
+		}else if(obj.getVolume()==1 && obj.getCategory().equals("0")){
+			price = 2030000;
+		}else if(obj.getVolume() == 256 && obj.getCategory().equals("1")) {
+			price = 1690000;
+		}else if(obj.getVolume() == 512 && obj.getCategory().equals("1")) {
+			price = 2690000;
+		}else if(obj.getVolume()==1 && obj.getCategory().equals("1")){
+			price = 3060000;
+		}
+		return price;
+	}
+	
 	public int getTotalPrice(List<Cart> cartList) {
 		int totalPrice = 0;
 		
@@ -60,7 +80,6 @@ public class BuyController {
 	
 	@PostMapping("/bag")
 	public String detail(Model model, Cart cart, HttpSession session) {
-		System.out.println(cart.getProduct_name());
 		List<Cart> cartList =(List)session.getAttribute("cartList");
 		if(cartList==null) {
 			cartList = new ArrayList<Cart>();
@@ -68,7 +87,7 @@ public class BuyController {
 		}	
 		
 		int count=0;
-		int price=0;
+	
 		Cart obj = null;
 		
 		for(int i=0; i<cartList.size(); i++) {
@@ -79,15 +98,7 @@ public class BuyController {
 				count++;
 				obj.setEa(obj.getEa()+1);
 				
-				if(obj.getVolume() == 128) {
-					price = 1350000;
-				}else if(obj.getVolume() == 256) {
-					price = 1490000;
-				}else if(obj.getVolume() == 512) {
-					price = 176000;
-				}else {
-					price = 2030000;
-				}
+				int price = setPriceFromV(obj);
 				obj.setPrice(price*obj.getEa());
 			}
 		}
@@ -113,34 +124,24 @@ public class BuyController {
 	}
 	
 	@GetMapping("/bag/edit/{index}/{ea}")
-	public String edit(Model model,Cart cart, @PathVariable int index, @PathVariable int ea, @SessionAttribute List<Cart> cartList){
+	public String edit(Model model,Cart cart, @PathVariable int index, @PathVariable int ea, @SessionAttribute List<Cart> cartList, HttpSession session){
 		System.out.println("edit호출 index = "+index+" ea = "+ea);
 		Cart obj=cartList.get(index);
 		System.out.println(obj.getColor());
-		int price =0;
-		if(obj.getVolume() == 128) {
-			price = 1350000;
-		}else if(obj.getVolume() == 256) {
-			price = 1490000;
-		}else if(obj.getVolume() == 512) {
-			price = 176000;
-		}else {
-			price = 2030000;
-		}
+
+		int price = setPriceFromV(obj);
 		
 		obj.setEa(ea);
 		obj.setPrice(price*ea);
-		model.addAttribute("msg", "장바구니가 수정되었습니다");
-		model.addAttribute("url", "/buy/bag");
-		
-		return "message";
+		session.setAttribute("cartList", cartList);
+		return "redirect:bag";
 	}
 	
 	@GetMapping("/bag/del/{index}")
 	public String removeOne(@PathVariable int index,@SessionAttribute List<Cart> cartList) {
 
 		Cart cart=cartList.get(index);		
-			cartList.remove(cart);
+		cartList.remove(cart);
 		
 		return path+"/bag";
 	}

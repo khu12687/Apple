@@ -44,8 +44,8 @@ button {
 	  <li><a href="/store/iphone">iPhone</a></li>
 	  <li><a href="/store/watch">Watch</a></li>
 	  <li><a href="/store/music">Music</a></li>
-	  <li><a href="https://support.apple.com/ko-kr">고객지원</a></li>
-	  <li><a href=""><img src="/resources/images/search.png" alt="검색"></a></li>
+	  <li><a href="javascript:alert('개발중인 기능입니다.')">고객지원</a></li>
+	  <li><a href="javascript:alert('개발중인 기능입니다.')"><img src="/resources/images/search.png" alt="검색"></a></li>
 	  <li><a href="/buy/bag"><img src="/resources/images/mybag.png" alt="장바구니"></a></li>
 	  <li>
 	  <c:if test="${sessionScope.member == null}">

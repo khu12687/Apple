@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.Dao.MemberDao;
 import kr.ac.kopo.model.Member;
+import kr.ac.kopo.util.Pager;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -49,6 +50,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member checkPhonetoId(Member member) {
 		return memberDao.checkPhonetoId(member);
+	}
+
+	@Override
+	public List<Member> selectAll(Pager pager) {
+
+		return memberDao.selectAll(pager);
 	}
 
 

@@ -9,6 +9,7 @@ import kr.ac.kopo.Dao.BuyDao;
 import kr.ac.kopo.model.Cart;
 import kr.ac.kopo.model.NonMemberOrder;
 import kr.ac.kopo.model.Orders;
+import kr.ac.kopo.util.Pager;
 
 @Service
 public class BuyServiceImpl implements BuyService{
@@ -58,6 +59,18 @@ public class BuyServiceImpl implements BuyService{
 	public List<Orders> selectMember(String id) {
 
 		return buyDao.selectMember(id);
+	}
+
+	@Override
+	public List<Orders> selectOrders(Pager pager) {
+
+		return buyDao.selectOrders(pager);
+	}
+
+	@Override
+	public List<NonMemberOrder> selectNonMemberOrder(Pager pager) {
+		
+		return buyDao.selectNonMemberOrder(pager);
 	}
 
 

@@ -3,6 +3,7 @@ package kr.ac.kopo.Dao;
 import java.util.List;
 
 import kr.ac.kopo.model.Member;
+import kr.ac.kopo.util.Pager;
 
 public interface MemberDao {
 
@@ -17,6 +18,8 @@ public interface MemberDao {
 	void changePw(Member member);
 
 	Member checkPhonetoId(Member member);
+
+	List<Member> selectAll(Pager pager);
 
 	
 

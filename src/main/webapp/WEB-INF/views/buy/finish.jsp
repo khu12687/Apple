@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +55,7 @@ tr:nth-child(even) {
 	<img style="margin-left: 23%;" src="/resources/images/thank.png">
 	<div style="margin-left: 25%; width: 60%;">	
 	<div>
-		<div>주문 일시:${list[0].order_date}</div>
+		<div>주문 일시:<fmt:formatDate value="${list[0].order_date}" type="date" pattern="yyyy-mm-dd HH:mm:ss"/>
 		<hr>
 	</div>
 	<div>

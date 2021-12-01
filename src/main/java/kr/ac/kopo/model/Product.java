@@ -8,6 +8,15 @@ public class Product {
 	private int volume;
 	private String category;
 	private String filename;
+	private int ea;
+	
+	public int getEa() {
+		return ea;
+	}
+
+	public void setEa(int ea) {
+		this.ea = ea;
+	}
 
 	public int getProduct_id() {
 		return product_id;

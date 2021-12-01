@@ -3,11 +3,11 @@
 <mapper namespace="orderProduct">
 
 	<insert id="insert">					
-		INSERT INTO product(product_id, order_id, product_name, color, price, volume, category, filename)
-		VALUES (NULL, #{order_id}, #{product_name}, #{color}, #{price}, #{volume}, #{category}, #{filename})
+		INSERT INTO product(product_id, order_id, product_name, color, price, volume, category, filename, ea)
+		VALUES (NULL, #{order_id}, #{product_name}, #{color}, #{price}, #{volume}, #{category}, #{filename}, #{ea})
 	</insert>
 	<insert id="insertNM">					
-		INSERT INTO product(product_id, nonMemberOrder_id, product_name, color, price, volume, category, filename)
-		VALUES (NULL, #{nonMemberOrder_id}, #{product_name}, #{color}, #{price}, #{volume}, #{category}, #{filename})
+		INSERT INTO product(product_id, nonMemberOrder_id, product_name, color, price, volume, category, filename, ea)
+		VALUES (NULL, #{nonMemberOrder_id}, #{product_name}, #{color}, #{price}, #{volume}, #{category}, #{filename}, #{ea})
 	</insert>
 </mapper>

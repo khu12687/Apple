@@ -3,12 +3,15 @@ package kr.ac.kopo.model;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class NonMemberOrder {
 	private int nonMemberOrder_id;
 	private String nm_name;
 	private String nm_email;
 	private String nm_address;
 	private String nm_phone;
+	@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
 	private Date nm_order_date;
 	private List<Cart> cart;
 

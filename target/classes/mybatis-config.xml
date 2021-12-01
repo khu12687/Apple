@@ -12,6 +12,7 @@
 	
 	<mappers>
 		<mapper resource="mybatis/member.xml" />
+		<mapper resource="mybatis/admin.xml" />
 		<mapper resource="mybatis/orderProduct.xml" />
 		<mapper resource="mybatis/orders.xml" />
 		<mapper resource="mybatis/receiver.xml" />

@@ -176,7 +176,7 @@ $(function(){
         </div>
 
         <input type="text" 		name="id" 			placeholder="Username" required>
-        <input type="password" name="password" 	placeholder="Password" required>
+        <input type="password" name="passwd" 	placeholder="Password" required>
         <input type="button" value="Login">
       </div>
       

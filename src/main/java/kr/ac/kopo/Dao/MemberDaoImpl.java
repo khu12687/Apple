@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.kopo.exception.DataNotFoundException;
 import kr.ac.kopo.model.Member;
+import kr.ac.kopo.util.Pager;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -53,6 +54,12 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public Member checkPhonetoId(Member member) {
 		return sql.selectOne("Member.checkPhonetoId",member);
+	}
+
+	@Override
+	public List<Member> selectAll(Pager pager) {
+
+		return sql.selectList("Member.selectAll",pager);
 	}
 
 }

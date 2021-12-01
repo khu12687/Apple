@@ -12,6 +12,31 @@
 <body>
 	<div class="container-fluid">
 		<h1>회원정보</h1>
+		
+		<div class="mb-2">
+			<form class="row">
+				<div class="col-8"></div>
+				<div class="col-auto">
+					<select name="search" class="form-select">
+						<option value="0">검색항목</option>
+						<option value="1" ${pager.search == 1 ? 'selected' : ''}>id</option>
+						<option value="2" ${pager.search == 2 ? 'selected' : ''}>name</option>
+						<option value="3" ${pager.search == 3 ? 'selected' : ''}>phone</option>
+						<option value="4" ${pager.search == 4 ? 'selected' : ''}>email</option>
+						<option value="5" ${pager.search == 5 ? 'selected' : ''}>address</option>
+					</select>
+				</div>
+				
+				<div class="col-auto">
+					<input type="text" name="keyword" value="${pager.keyword}" class="form-control">
+				</div>
+				
+				<div class="col-auto">
+					<button class="btn btn-dark">검색</button>
+				</div>
+			</form>
+		</div>
+		
 		<table class="table">
 			<thead class="table-dark">
 				<tr>
@@ -19,7 +44,7 @@
 					<td>name</td>
 					<td>phone</td>
 					<td>email</td>
-					<td>addr</td>
+					<td>address</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,8 +61,7 @@
 						<td>${member.name}</td>
 						<td>${member.phone}</td>
 						<td>${member.email}</td>
-						<td>${member.addr}</td>
-						<td><a class="btn btn-sm btn-danger" href="delete?id=${member.id}">삭제</a><a class="btn btn-sm btn-success" href="memberUpdate?member_id=${member.member_id}">변경</a></td>				
+						<td>${member.address}</td>		
 					</tr>
 				</c:forEach>
 			</tbody>

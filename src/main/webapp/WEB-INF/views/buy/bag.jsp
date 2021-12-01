@@ -88,8 +88,8 @@ function del(index){
 			    <th>수량</th>
 			    <th>관리</th>
 			  </tr>
-			  <c:if test="${cartList != null }">
-				  <c:forEach var="item" items="${cartList}" varStatus="status">
+			  <c:if test="${sessionScope.cartList != null }">
+				  <c:forEach var="item" items="${sessionScope.cartList}" varStatus="status">
 				  <c:set var="totalBuy" value="${totalBuy+item.getPrice()}"></c:set>
 				   <tr>
 					    <td><img src="/resources/images/${item.filename}" style="width: 50px; height: 50px;"></td>
@@ -128,7 +128,7 @@ function del(index){
 				  </tr>
 			   </c:forEach>
 			</c:if>
-			<c:if test="${cartList.size() < 1}">					
+			<c:if test="${sessionScope.cartList.size() < 1}">					
 				<tr>
 					<td colspan="8">장바구니가 비어있습니다</td>
 				</tr>
@@ -174,7 +174,7 @@ function del(index){
 					<option value="512">512GB</option>
 					<option value="1">1TB</option>
 				</select>							
-			</div>		
+			</div>
 			<div class="mt-2">					
 				<label>가격:</label>	
 				<select name="price" id="pricePhone" class="form-select">

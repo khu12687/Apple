@@ -12,6 +12,7 @@ import kr.ac.kopo.model.NonMemberOrder;
 import kr.ac.kopo.model.Orders;
 import kr.ac.kopo.model.Product;
 import kr.ac.kopo.model.Receiver;
+import kr.ac.kopo.util.Pager;
 
 @Repository
 public class BuyDaoImpl implements BuyDao{
@@ -56,6 +57,18 @@ public class BuyDaoImpl implements BuyDao{
 	public List<Orders> selectMember(String id) {
 
 		return sql.selectList("orders.selectMember",id);
+	}
+
+	@Override
+	public List<Orders> selectOrders(Pager pager) {
+		
+		return sql.selectList("orders.selectOrdersAll",pager);
+	}
+
+	@Override
+	public List<NonMemberOrder> selectNonMemberOrder(Pager pager) {
+		
+		return sql.selectList("nmo.selectNonMemberOrderAll",pager);
 	}
 
 
